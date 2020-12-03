@@ -42,8 +42,10 @@
                 const basic = this.state.basic,
                     hra = this.state.hra,
                     da = this.state.da,
-                 tax = this.state.tax;
-                const salary = (basic + hra + da) * ((100-tax)/100);
+                    tax = this.state.tax;
+                const gross = (basic + hra + da);
+                console.log(gross)
+                const salary = gross * ((100-tax)/100);
 
                 this.setState({ basic : basic });
                 this.setState({ hra : hra });
@@ -53,19 +55,19 @@
             }
             
             onBasicTxtChange = (evt) => {
-                this.setState({ basic : evt.target.value });
+                this.setState({ basic : parseInt(evt.target.value) });
             }
 
             onHraTxtChange = (evt) => {
-                this.setState({ basic : evt.target.value });
+                this.setState({ hra : parseInt(evt.target.value) });
             }
 
             onDaTxtChange = (evt) => {
-                this.setState({ basic : evt.target.value });
+                this.setState({ da : parseInt(evt.target.value) });
             }
 
             onTaxTxtChange = (evt) => {
-                this.setState({ basic : evt.target.value });
+                this.setState({ tax : parseInt(evt.target.value) });
             }
         
             //Presentation
@@ -108,7 +110,7 @@
         ReactDOM.render(
             /* React.createElement(Greeter, { template : 'Have a good day!'}),  */
             <div>
-                <Greeter template=""/>
+                <Greeter/>
             </div>,
             document.getElementById('root')
         )
