@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Salary Calculator React</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+    <style>
+        body{
+            margin: 50px;
+        }
+        .field{
+            margin-bottom: 10px;
+        }
+        label{
+            display : block;
+        }
+        td{
+            padding-right: 10px;
+            font-size: 16pt;
+            font-weight: bold;
+        }
+    </style>
+    <!-- basic + hra + da - tax = salary -->
+
+    <script type="text/babel">
+        class Greeter extends React.Component{
+            //state
+            state = {
+                basic : 0,
+                hra : 0,
+                da : 0,
+                tax : 0,
+                salary : 0
+            };
+
+            //UI Behavior
+            onBtnCalculateClick = () => {
+                const basic = this.state.basic,
+                    hra = this.state.hra,
+                    da = this.state.da,
+                 tax = this.state.tax;
+                const salary = (basic + hra + da) * ((100-tax)/100);
+
+                this.setState({ basic : basic });
+                this.setState({ hra : hra });
+                this.setState({ da : da });
+                this.setState({ tax : tax });
+                this.setState({ salary : salary });
+            }
+            
+            onBasicTxtChange = (evt) => {
+                this.setState({ basic : evt.target.value });
+            }
+
+            onHraTxtChange = (evt) => {
+                this.setState({ basic : evt.target.value });
+            }
+
+            onDaTxtChange = (evt) => {
+                this.setState({ basic : evt.target.value });
+            }
+
+            onTaxTxtChange = (evt) => {
+                this.setState({ basic : evt.target.value });
+            }
+        
+            //Presentation
+            render(){
+                console.log(this.props);
+                return(
+                     <div>
+                        <h3>Greeter</h3>
+                        <hr/>
+                        <label htmlFor="">Basic :</label>
+                        <input type="number" onChange={this.onBasicTxtChange} />
+                        <label htmlFor="">HRA :</label>
+                        <input type="number" onChange={this.onHraTxtChange} />
+                        <label htmlFor="">DA :</label>
+                        <input type="number" onChange={this.onDaTxtChange} />
+                        <label htmlFor="">Tax :</label>
+                        <input type="range" id="rangeTax" min="0" max="30" onChange={this.onTaxTxtChange} />
+                        <input type="button" value="Calculate" onClick={this.onBtnCalculateClick} />
+                        
+
+                        <div className="field">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td id="tdBasic">{this.state.basic}</td>
+                                        <td id="tdHra">{this.state.hra}</td>
+                                        <td id="tdDa">{this.state.da}</td>
+                                        <td id="tdTax">{this.state.tax}</td>
+                                        <td id="tdSalary">{this.state.salary}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                )
+            }
+        }
+
+        ReactDOM.render(
+            /* React.createElement(Greeter, { template : 'Have a good day!'}),  */
+            <div>
+                <Greeter template=""/>
+            </div>,
+            document.getElementById('root')
+        )
+    </script>
+</head>
+<body>
+    <div id="root">
+       
+    </div>
+</body>
+</html>
