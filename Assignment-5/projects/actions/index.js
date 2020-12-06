@@ -1,15 +1,14 @@
 import projectApi from '../services/projectApi';
-let currentProjectId = 0;
+//let currentProjectId = 0;
  
-export const addNew = (projectName) => {
-    const action = {
-        type: "PROJECT_ADD_NEW",
-        payload: {
-        id: ++currentProjectId,
-        name: projectName,
-        createdAt: new Date()
-        }
+export async function addNew(projectName){
+
+    const newProject= {
+        id: 0,
+        name: projectName
     };
+    await projectApi.save(newProject);
+    const action = { type : 'PROJECT_ADD_NEW', payload : newProject } ;
     return action;
 }
 
